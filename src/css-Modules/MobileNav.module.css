@@ -1,0 +1,29 @@
+.linkColour{
+  color: black;
+  text-decoration: none;
+}
+
+.linkColour:hover{
+  color:burlywood;
+  cursor: pointer;
+}
+
+.ul{
+  padding : 0.3rem;
+  list-style: none;
+  
+  
+}
+
+.li{
+  padding:1rem;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.parent{
+  width:100%;
+  display:flex;
+  justify-content: center;
+}
