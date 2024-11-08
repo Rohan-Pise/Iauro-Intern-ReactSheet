@@ -3,8 +3,10 @@ import {Link} from "react-router-dom"
 import styles from "../css-Modules/MobileNav.module.css";
 import{useSelector , useDispatch} from 'react-redux'
 import { updateToFalse , updateToTrue } from '../features/hamburger'
+import { updateToFalse as updateLoginToFalse, updateToTrue as updateLoginToTrue } from '../features/loginSlice';
 function MobileNav() {
   const isHam = useSelector((state)=> state.ham.value);
+  const isLogin = useSelector((state)=>state.login.value);
   const dispatch = useDispatch();
   return (
     <>
@@ -18,10 +20,19 @@ function MobileNav() {
           dispatch(updateToTrue())}}>Contacts</Link> </li>
             <li className={styles.li}  onClick={()=>{
           dispatch(updateToTrue())}}><Link to="/help"className={styles.linkColour}>Help</Link></li>
-            <li  className={styles.li}  onClick={()=>{
-          dispatch(updateToTrue())}}>
-            <Link to="/login"className={styles.linkColour} >login</Link>
-            </li>
+           
+
+            {isLogin ? <li className={styles.li} onClick={()=>{
+              dispatch(updateLoginToFalse());
+              dispatch(updateToTrue());
+            }}>
+            <Link to="/logout"className={styles.linkColour}>logout</Link>
+            </li> : 
+            <li className={styles.li}>
+            <Link to="/login"className={styles.linkColour}>login</Link>
+            </li> 
+            }  
+
           </ul>
        </div>
     </>
