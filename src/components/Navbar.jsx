@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Link} from "react-router-dom"
 import styles from "../css-Modules/Navbar.module.css";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -6,11 +6,31 @@ import { IoMdClose } from "react-icons/io";
 import{useSelector , useDispatch} from 'react-redux'
 import { updateToFalse , updateToTrue } from '../features/hamburger'
 import { updateToFalse as updateLoginToFalse, updateToTrue as updateLoginToTrue } from '../features/loginSlice';
+import{app} from "../firebase"
+import{getAuth , signOut , GoogleAuthProvider,onAuthStateChanged }from "firebase/auth";
+
+const auth = getAuth(app);
 
 function Navbar() {
   const isHam = useSelector((state)=>state.ham.value);
   const isLogin = useSelector((state)=>state.login.value);
   const dispatch = useDispatch();
+
+  const logout =()=>{
+    signOut(auth);
+  }
+  
+  useEffect(()=>{
+    onAuthStateChanged(auth,(user)=>{
+      if(user){
+        useDispatch(updateLoginToTrue());
+      }else{
+        useDispatch(updateLoginToFalse());
+      }
+    })
+  })
+
+
   return (
     
     <>
@@ -26,9 +46,7 @@ function Navbar() {
             <li><Link to="/help"className={styles.linkColour}>Help</Link></li>
 
 
-            {isLogin ? <li onClick={()=>{
-              dispatch(updateLoginToFalse())
-            }}>
+            {isLogin ? <li onClick={logout}>
             <Link to="/logout"className={styles.linkColour}>logout</Link>
             </li> : 
             <li>
