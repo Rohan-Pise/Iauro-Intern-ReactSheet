@@ -1,3 +1,4 @@
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -5,9 +6,9 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCkp1dvHe4Kx5TN6vTiUEjtw9NeDBDwDdw",
+  apiKey: import.meta.env.VITE_API_KEY,
   authDomain: "rohan-s-app-e71c4.firebaseapp.com",
-  databaseURL: "https://rohan-s-app-e71c4-default-rtdb.firebaseio.com",
+  databaseURL: import.meta.env.VITE_DATABASE_URL,
   projectId: "rohan-s-app-e71c4",
   storageBucket: "rohan-s-app-e71c4.firebasestorage.app",
   messagingSenderId: "955882736695",
